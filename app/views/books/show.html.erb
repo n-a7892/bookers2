@@ -1,0 +1,65 @@
+<p id="notice"></p>
+<div class="container">
+  <% if @book.errors.any? %>
+     <%= @book.errors.count %>error
+      <ul>
+       <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+      </ul>
+  <% end %>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= image_tag @bookf.user.get_profile_image(60,60) %>
+      <table class="table table-inverse">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @bookf.user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @bookf.user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+
+<%= link_to edit_user_path(@bookf.user) do %>
+ <div class="btn btn-outline-secondary btn-block">
+  <i class="fas fa-user-cog"></i>
+ </div>
+<% end %>
+      <%= render 'new', book: @book %>
+
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class = "table table-hover table-inverse">
+        <tbody>
+           <tr>
+            <td>
+              <%= link_to image_tag(@bookf.user.get_profile_image(40,40)), "/users/#{@bookf.user.id}" %><br>
+              <%= link_to @bookf.user.name, "/users/#{@bookf.user.id}"%>
+            </td>
+            <td><%= link_to @bookf.title, "/books/#{@bookf.id}"%></td>
+            <td><%= @bookf.body %></td>
+            <% if @bookf.user_id == current_user.id %>
+            <td>
+              <div class="btn btn-sm btn-success">
+               <%= link_to "Edit", edit_book_path(@bookf) %>
+              </div>
+            </td>
+            <td>
+              <div class="btn btn-sm btn-danger">
+               <%= link_to "Destroy", "/books/#{@bookf.id}", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+              </div>
+            </td>
+               <% end %>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

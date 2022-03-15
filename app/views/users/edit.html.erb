@@ -1,0 +1,24 @@
+<div class="container">
+ <% if @user.errors.any? %>
+     <%= @user.errors.count %>error
+      <ul>
+       <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+      </ul>
+  <% end %>
+<div class="row">
+<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+  <h2>User info</h2>
+  <%= form_with model: @user, url: user_path(@user.id), method: :patch do |u| %>
+   <h4>Name</h4>
+    <%= u.text_field :name %>
+   <h4>Image</h4>
+    <%= u.file_field :profile_image, accept: "image/*" %>
+   <h4>Introduction</h4>
+    <%= u.text_area :introduction %><br>
+    <%= u.submit 'Update User' %>
+  <% end %>
+</div>
+</div>
+</div>

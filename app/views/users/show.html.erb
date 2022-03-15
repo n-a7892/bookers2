@@ -1,0 +1,59 @@
+<p id="notice"></p>
+<div class="container">
+  <% if @book.errors.any? %>
+     <%= @book.errors.count %>error
+      <ul>
+       <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+      </ul>
+  <% end %>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(60,60) %>
+      <table class="table table-inverse">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+
+<%= link_to edit_user_path(@user) do %>
+ <div class="btn btn-outline-secondary btn-block">
+  <i class="fas fa-user-cog"></i>
+ </div>
+<% end %>
+      <%= render 'new', book: @book %>
+
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class = "table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Tilte</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.books.each do |ub|%>
+           <tr>
+            <td><%= link_to image_tag(@user.get_profile_image(40,40)), user_path(@user) %></td>
+            <td><%= link_to ub.title, book_path(ub)%></td>
+            <td><%= ub.body %></td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

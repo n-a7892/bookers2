@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+     <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-2" href="/">Bookers</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+
+            <li class="nav-item ">
+              <%= link_to user_path(current_user.id) do %>
+              <i class="fas fa-home nav-link text-dark"></i>
+              <p>Home</p>
+              <% end %>
+            </li>
+            <li class="nav-item ">
+              <%=  link_to users_path do %>
+              <i class="fas fa-users nav-link text-dark"></i>
+              <p>Users</p>
+              <% end %>
+            </li>
+            <li class="nav-item ">
+              <%= link_to books_path do %>
+              <i class="fas fa-book-open nav-link text-dark"></i>
+              <p>Books</p>
+              <% end %>
+            </li>
+            <li class="nav-item ">
+              <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="fas fa-sign-out-alt nav-link text-dark"></i>
+              <p>Log out</p>
+              <% end %>
+            </li>
+
+            <% else %>
+            <li class="nav-item">
+              <%= link_to root_path do %>
+              <i class="fas fa-home nav-link text-dark"></i>
+              <p>Home</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to about_path do %>
+              <i class="fas fa-link nav-link text-dark"></i>
+              <p>About</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path do %>
+              <i class="fas fa-user-plus nav-link text-dark"></i>
+              <p>Sign up</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path do %>
+              <i class="fas fa-sign-in-alt nav-link text-dark"></i>
+              <p>Log in</p>
+              <% end %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <body>
+    <%= flash[:notice] %>
+    <%= yield %>
+    </body>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
